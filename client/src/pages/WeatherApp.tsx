@@ -15,7 +15,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
-import { MapPin, Star, BarChart3, Clock, Sun, Moon, Loader2, AlertCircle, Brain, Wind } from "lucide-react";
+import { MapPin, Star, BarChart3, Clock, Sun, Moon, Loader2, AlertCircle, Brain, Wind, Menu, X } from "lucide-react";
 import { useFavorites, useCurrentLocation, useWeatherData, useCompareWeatherData } from "@/hooks/useWeatherData";
 import type { Location } from "@/lib/weatherApi";
 
@@ -28,6 +28,9 @@ export default function WeatherApp() {
   const [compareLocations, setCompareLocations] = useState<Location[]>([]);
   const [unit, setUnit] = useState<'metric' | 'imperial'>('metric');
   const [activeView, setActiveView] = useState<'weather' | 'forecast' | 'hourly' | 'suggestions' | 'air-quality' | 'compare' | 'favorites'>('weather');
+
+  // Mobile menu state for header
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // Get weather data for current location
   const {
@@ -216,31 +219,80 @@ export default function WeatherApp() {
             <div className="max-w-7xl mx-auto px-3 py-2">
               <div className="flex items-center justify-between gap-3">
                 <div className="flex items-center space-x-3">
-                  <h1 className="text-xl font-bold text-shimmer animate-float">🌤️ AeroForecast</h1>
+                  <h1 className="text-lg sm:text-xl font-bold text-shimmer animate-float">🌤️ AeroForecast</h1>
                   <Badge variant="outline" className="hidden sm:flex border-primary/30 text-primary animate-pulse-soft text-xs">
                     {weatherLoading ? 'Loading...' : 'Live Data'}
                   </Badge>
                 </div>
 
-                <div className="flex-1 max-w-md">
-                  <SearchBar
-                    onLocationSelect={handleLocationSelect}
-                    onCurrentLocation={handleCurrentLocation}
-                    favorites={favorites}
-                    onToggleFavorite={handleToggleFavorite}
-                  />
+                {/* Desktop Header */}
+                <div className="hidden sm:flex items-center gap-4">
+                  <div className="flex-1 max-w-md">
+                    <SearchBar
+                      onLocationSelect={handleLocationSelect}
+                      onCurrentLocation={handleCurrentLocation}
+                      favorites={favorites}
+                      onToggleFavorite={handleToggleFavorite}
+                    />
+                  </div>
+
+                  <div className="flex items-center space-x-1">
+                    <UnitToggle unit={unit} onUnitChange={setUnit} />
+                    <ThemeToggle />
+                  </div>
                 </div>
 
-                <div className="flex items-center space-x-1">
-                  <UnitToggle unit={unit} onUnitChange={setUnit} />
-                  <ThemeToggle />
+                {/* Mobile Header */}
+                <div className="sm:hidden">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                    className="flex items-center space-x-2"
+                  >
+                    <Menu className="w-4 h-4" />
+                    <span className="text-sm">Menu</span>
+                  </Button>
                 </div>
               </div>
+
+              {/* Mobile Dropdown Menu */}
+              {isMobileMenuOpen && (
+                <div className="sm:hidden mt-3 py-3 border-t border-border/50 bg-background/95 backdrop-blur-md rounded-lg">
+                  <div className="space-y-3">
+                    {/* Search Bar for Mobile */}
+                    <div className="px-3">
+                      <SearchBar
+                        onLocationSelect={handleLocationSelect}
+                        onCurrentLocation={handleCurrentLocation}
+                        favorites={favorites}
+                        onToggleFavorite={handleToggleFavorite}
+                      />
+                    </div>
+
+                    {/* Controls */}
+                    <div className="flex items-center justify-between px-3">
+                      <div className="flex items-center space-x-2">
+                        <UnitToggle unit={unit} onUnitChange={setUnit} />
+                        <ThemeToggle />
+                      </div>
+
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        <X className="w-4 h-4" />
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </header>
 
           {/* Navigation */}
-          <nav className="sticky top-[57px] z-40 glass-effect-subtle border-b border-border/30">
+          <nav className="sticky top-[73px] z-40 glass-effect-subtle border-b border-border/30">
             <div className="max-w-7xl mx-auto px-3">
               <div className="flex space-x-1 py-1.5">
                 {[
