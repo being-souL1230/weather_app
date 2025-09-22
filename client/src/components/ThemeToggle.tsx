@@ -1,52 +1,62 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Sun, Moon, Monitor } from "lucide-react";
+import { Sun, Moon, Cloud, CloudRain, Zap } from "lucide-react";
 
-type Theme = 'light' | 'dark' | 'auto';
+type Theme = 'light' | 'dark' | 'dim' | 'enhanced';
 
 interface ThemeToggleProps {
   className?: string;
 }
 
 export default function ThemeToggle({ className = "" }: ThemeToggleProps) {
-  const [theme, setTheme] = useState<Theme>('auto');
+  const [theme, setTheme] = useState<Theme>('light');
 
   useEffect(() => {
-    // Get initial theme from localStorage or default to auto
+    // Get initial theme from localStorage or default to light
     const savedTheme = localStorage.getItem('theme') as Theme | null;
     if (savedTheme) {
       setTheme(savedTheme);
       applyTheme(savedTheme);
     } else {
-      applyTheme('auto');
+      applyTheme('light');
     }
   }, []);
 
   const applyTheme = (newTheme: Theme) => {
     const root = document.documentElement;
-    
-    if (newTheme === 'auto') {
-      // Check time of day for automatic switching
-      const hour = new Date().getHours();
-      const isDarkTime = hour < 6 || hour > 18; // Dark from 6 PM to 6 AM
-      
-      if (isDarkTime) {
+
+    // Remove all theme classes
+    root.classList.remove('dark');
+
+    // Apply new theme
+    switch (newTheme) {
+      case 'dark':
         root.classList.add('dark');
-      } else {
+        root.classList.remove('weather-theme-default', 'weather-theme-dim-blue', 'weather-theme-enhanced');
+        root.classList.add('weather-theme-default');
+        break;
+      case 'dim':
+        root.classList.add('dark');
+        root.classList.remove('weather-theme-default', 'weather-theme-dim-blue', 'weather-theme-enhanced');
+        root.classList.add('weather-theme-dim-blue');
+        break;
+      case 'enhanced':
+        root.classList.add('dark');
+        root.classList.remove('weather-theme-default', 'weather-theme-dim-blue', 'weather-theme-enhanced');
+        root.classList.add('weather-theme-enhanced');
+        break;
+      default: // light
         root.classList.remove('dark');
-      }
-    } else if (newTheme === 'dark') {
-      root.classList.add('dark');
-    } else {
-      root.classList.remove('dark');
+        root.classList.remove('weather-theme-default', 'weather-theme-dim-blue', 'weather-theme-enhanced');
+        root.classList.add('weather-theme-default');
     }
   };
 
   const handleThemeChange = () => {
-    const themeOrder: Theme[] = ['light', 'dark', 'auto'];
+    const themeOrder: Theme[] = ['light', 'dark', 'dim', 'enhanced'];
     const currentIndex = themeOrder.indexOf(theme);
     const nextTheme = themeOrder[(currentIndex + 1) % themeOrder.length];
-    
+
     console.log('Theme changed to:', nextTheme);
     setTheme(nextTheme);
     localStorage.setItem('theme', nextTheme);
@@ -59,8 +69,10 @@ export default function ThemeToggle({ className = "" }: ThemeToggleProps) {
         return Sun;
       case 'dark':
         return Moon;
-      case 'auto':
-        return Monitor;
+      case 'dim':
+        return Cloud;
+      case 'enhanced':
+        return CloudRain;
     }
   };
 
@@ -70,8 +82,10 @@ export default function ThemeToggle({ className = "" }: ThemeToggleProps) {
         return 'Light';
       case 'dark':
         return 'Dark';
-      case 'auto':
-        return 'Auto';
+      case 'dim':
+        return 'Dim';
+      case 'enhanced':
+        return 'Enhanced';
     }
   };
 
@@ -82,8 +96,9 @@ export default function ThemeToggle({ className = "" }: ThemeToggleProps) {
       variant="outline"
       size="sm"
       onClick={handleThemeChange}
-      className={`min-w-[80px] ${className}`}
+      className={`min-w-[100px] ${className}`}
       data-testid="button-theme-toggle"
+      title="Toggle theme"
     >
       <div className="flex items-center space-x-2">
         <ThemeIcon className="w-4 h-4" />

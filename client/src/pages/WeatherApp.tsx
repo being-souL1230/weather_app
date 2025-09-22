@@ -491,7 +491,7 @@ export default function WeatherApp() {
           {/* Footer */}
           <footer className="mt-4 glass-effect-subtle border-t border-border/30">
             <div className="max-w-7xl mx-auto px-3 py-3">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <div className="space-y-1">
                   <h3 className="text-sm font-bold text-gradient">🌤️ AeroForecast</h3>
                   <p className="text-muted-foreground text-xs leading-relaxed">
@@ -505,39 +505,6 @@ export default function WeatherApp() {
                       Free & Open Source
                     </Badge>
                   </div>
-                </div>
-                <div className="space-y-1">
-                  <h4 className="font-semibold text-foreground text-xs">Features</h4>
-                  <ul className="space-y-0.5 text-xs text-muted-foreground">
-                    <li className="flex items-center space-x-1">
-                      <div className="w-1 h-1 bg-primary rounded-full"></div>
-                      <span>Real-time weather updates</span>
-                    </li>
-                    <li className="flex items-center space-x-1">
-                      <div className="w-1 h-1 bg-primary rounded-full"></div>
-                      <span>7-day forecasts</span>
-                    </li>
-                    <li className="flex items-center space-x-1">
-                      <div className="w-1 h-1 bg-primary rounded-full"></div>
-                      <span>AI-powered suggestions</span>
-                    </li>
-                    <li className="flex items-center space-x-1">
-                      <div className="w-1 h-1 bg-primary rounded-full"></div>
-                      <span>Detailed air quality</span>
-                    </li>
-                    <li className="flex items-center space-x-1">
-                      <div className="w-1 h-1 bg-primary rounded-full"></div>
-                      <span>Location comparison</span>
-                    </li>
-                    <li className="flex items-center space-x-1">
-                      <div className="w-1 h-1 bg-primary rounded-full"></div>
-                      <span>Favorites management</span>
-                    </li>
-                    <li className="flex items-center space-x-1">
-                      <div className="w-1 h-1 bg-primary rounded-full"></div>
-                      <span>Dark/Light themes</span>
-                    </li>
-                  </ul>
                 </div>
                 <div className="space-y-1">
                   <h4 className="font-semibold text-foreground text-xs">Data Source</h4>

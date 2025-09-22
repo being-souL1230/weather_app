@@ -128,15 +128,15 @@ export default function CompareLocations({
 
   return (
     <div className={className}>
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4">
         <h3 className="text-xl font-semibold text-foreground">Compare Locations</h3>
-        <div className="flex items-center space-x-2">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-2">
           {favorites && favorites.length > 0 && locations.length < maxLocations && (
             <Select onValueChange={(value) => {
               const favorite = favorites.find(fav => fav.id === value);
               if (favorite) handleAddFavoriteToCompare(favorite);
             }}>
-              <SelectTrigger className="w-48">
+              <SelectTrigger className="w-full sm:w-48">
                 <SelectValue placeholder="Add from favorites" />
               </SelectTrigger>
               <SelectContent>
@@ -153,76 +153,78 @@ export default function CompareLocations({
               </SelectContent>
             </Select>
           )}
-          {locations.length < maxLocations && (
-            <Button size="sm" onClick={handleAddLocation} data-testid="button-add-location">
-              <Plus className="w-4 h-4 mr-2" />
-              Add Current
-            </Button>
-          )}
-          {locations.length < maxLocations && onAddAnyLocationToCompare && (
-            <Dialog open={searchDialogOpen} onOpenChange={setSearchDialogOpen}>
-              <DialogTrigger asChild>
-                <Button size="sm" data-testid="button-add-any-location">
-                  <Plus className="w-4 h-4 mr-2" />
-                  Add Any Location
-                </Button>
-              </DialogTrigger>
-              <DialogContent className="sm:max-w-md">
-                <DialogHeader>
-                  <DialogTitle>Search Location</DialogTitle>
-                </DialogHeader>
-                <div className="space-y-4">
-                  <div className="relative">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                    <Input
-                      type="text"
-                      placeholder="Enter city name..."
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
-                      className="pl-10"
-                    />
-                  </div>
-                  <Button
-                    onClick={handleSearch}
-                    disabled={isSearching || searchQuery.length < 3}
-                    className="w-full"
-                  >
-                    {isSearching ? 'Searching...' : 'Search'}
+          <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
+            {locations.length < maxLocations && (
+              <Button size="sm" onClick={handleAddLocation} data-testid="button-add-location">
+                <Plus className="w-4 h-4 mr-2" />
+                Add Current
+              </Button>
+            )}
+            {locations.length < maxLocations && onAddAnyLocationToCompare && (
+              <Dialog open={searchDialogOpen} onOpenChange={setSearchDialogOpen}>
+                <DialogTrigger asChild>
+                  <Button size="sm" data-testid="button-add-any-location">
+                    <Plus className="w-4 h-4 mr-2" />
+                    Add Any Location
                   </Button>
-
-                  {searchResults.length > 0 && (
-                    <div className="max-h-48 overflow-y-auto space-y-2">
-                      <h4 className="text-sm font-medium text-muted-foreground">Search Results:</h4>
-                      {searchResults.map((result) => (
-                        <div
-                          key={result.id}
-                          className="flex items-center justify-between p-3 rounded-lg border hover:bg-accent/50 cursor-pointer"
-                          onClick={() => handleAddSearchResult(result)}
-                        >
-                          <div>
-                            <div className="font-medium">{result.name}</div>
-                            {result.country && (
-                              <div className="text-sm text-muted-foreground">{result.country}</div>
-                            )}
-                          </div>
-                          <Button size="sm" variant="outline">
-                            Add
-                          </Button>
-                        </div>
-                      ))}
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-md">
+                  <DialogHeader>
+                    <DialogTitle>Search Location</DialogTitle>
+                  </DialogHeader>
+                  <div className="space-y-4">
+                    <div className="relative">
+                      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                      <Input
+                        type="text"
+                        placeholder="Enter city name..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
+                        className="pl-10"
+                      />
                     </div>
-                  )}
+                    <Button
+                      onClick={handleSearch}
+                      disabled={isSearching || searchQuery.length < 3}
+                      className="w-full"
+                    >
+                      {isSearching ? 'Searching...' : 'Search'}
+                    </Button>
 
-                  {searchQuery.length >= 3 && !isSearching && searchResults.length === 0 && (
-                    <p className="text-sm text-muted-foreground text-center">
-                      No locations found. Try a different search term.
-                    </p>
-                  )}
-                </div>
-              </DialogContent>
-            </Dialog>
-          )}
+                    {searchResults.length > 0 && (
+                      <div className="max-h-48 overflow-y-auto space-y-2">
+                        <h4 className="text-sm font-medium text-muted-foreground">Search Results:</h4>
+                        {searchResults.map((result) => (
+                          <div
+                            key={result.id}
+                            className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-3 rounded-lg border hover:bg-accent/50 cursor-pointer gap-2"
+                            onClick={() => handleAddSearchResult(result)}
+                          >
+                            <div className="flex-1">
+                              <div className="font-medium">{result.name}</div>
+                              {result.country && (
+                                <div className="text-sm text-muted-foreground">{result.country}</div>
+                              )}
+                            </div>
+                            <Button size="sm" variant="outline" className="w-full sm:w-auto">
+                              Add
+                            </Button>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+                    {searchQuery.length >= 3 && !isSearching && searchResults.length === 0 && (
+                      <p className="text-sm text-muted-foreground text-center">
+                        No locations found. Try a different search term.
+                      </p>
+                    )}
+                  </div>
+                </DialogContent>
+              </Dialog>
+            )}
+          </div>
         </div>
       </div>
 
@@ -293,7 +295,7 @@ export default function CompareLocations({
       {locations.length >= 2 && (
         <Card className="mt-6 p-4 gradient-bg border border-primary/20 shadow-lg" data-testid="card-comparison-summary">
           <h4 className="font-medium text-foreground mb-3">Quick Comparison</h4>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-sm">
             <div>
               <span className="text-muted-foreground">Warmest:</span>
               <div className="font-medium">
@@ -305,7 +307,7 @@ export default function CompareLocations({
                 })()}
               </div>
             </div>
-            
+
             <div>
               <span className="text-muted-foreground">Coolest:</span>
               <div className="font-medium">
@@ -317,7 +319,7 @@ export default function CompareLocations({
                 })()}
               </div>
             </div>
-            
+
             <div>
               <span className="text-muted-foreground">Most Humid:</span>
               <div className="font-medium">
@@ -329,7 +331,7 @@ export default function CompareLocations({
                 })()}
               </div>
             </div>
-            
+
             <div>
               <span className="text-muted-foreground">Windiest:</span>
               <div className="font-medium">

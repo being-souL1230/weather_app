@@ -156,19 +156,19 @@ export default function AirQualityDetails({
         </div>
 
         {/* Pollutant Grid - More compact */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {airQualityData.map(({ key, value }) => {
             const pollutant = pollutants[key];
             const status = pollutant.getStatus(value);
 
             return (
               <div key={key} className="p-3 rounded-lg border bg-card/50">
-                <div className="flex items-center justify-between mb-2">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2 gap-2">
                   <div className="flex items-center space-x-1">
                     <span className="font-medium text-foreground text-sm">{pollutant.name}</span>
                     <span className="text-xs text-muted-foreground">({pollutant.description})</span>
                   </div>
-                  <div className={`flex items-center space-x-1 px-1.5 py-0.5 rounded-full ${status.color} text-white`}>
+                  <div className={`flex items-center space-x-1 px-1.5 py-0.5 rounded-full ${status.color} text-white w-fit`}>
                     {status.icon}
                     <span className="text-xs font-medium capitalize">{status.status.replace('-', ' ')}</span>
                   </div>

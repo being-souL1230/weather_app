@@ -112,11 +112,11 @@ export default function HourlyForecast({
   return (
     <Card className={`p-6 transition-all duration-300 gradient-bg border border-border/30 shadow-xl ${className}`} data-testid="card-hourly-forecast">
       <div className="space-y-4">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <h3 className="text-xl font-semibold text-foreground">Hourly Forecast</h3>
-          
+
           {/* Day Selector */}
-          <div className="flex space-x-1">
+          <div className="flex flex-wrap gap-2">
             {availableDays.map((day, index) => (
               <Button
                 key={day}
@@ -135,29 +135,29 @@ export default function HourlyForecast({
         {/* Hourly Data with Pagination */}
         <div className="space-y-4">
           {/* Pagination Controls */}
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <Button
               variant="outline"
               size="sm"
               onClick={handlePrevPage}
               disabled={currentPage === 0}
-              className="flex items-center space-x-1"
+              className="flex items-center space-x-1 w-full sm:w-auto"
               data-testid="button-prev-page"
             >
               <ChevronLeft className="w-4 h-4" />
               <span>Previous</span>
             </Button>
-            
-            <div className="text-sm text-muted-foreground">
+
+            <div className="text-sm text-muted-foreground text-center">
               Page {currentPage + 1} of {getTotalPages()}
             </div>
-            
+
             <Button
               variant="outline"
               size="sm"
               onClick={handleNextPage}
               disabled={currentPage === getTotalPages() - 1}
-              className="flex items-center space-x-1"
+              className="flex items-center space-x-1 w-full sm:w-auto"
               data-testid="button-next-page"
             >
               <span>Next</span>
@@ -166,61 +166,61 @@ export default function HourlyForecast({
           </div>
 
           {/* Current Page Data */}
-          <div className="grid grid-cols-5 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
             {getCurrentPageData().map((hour: HourlyData, index: number) => {
               const actualIndex = currentPage * itemsPerPage + index;
               const WeatherIcon = getWeatherIcon(hour.condition);
-              
+
               return (
                 <div
                   key={hour.time}
-                  className="flex flex-col items-center space-y-2 p-3 rounded-md bg-muted/20 transition-colors"
+                  className="flex flex-col items-center space-y-2 p-3 rounded-md bg-muted/20 transition-colors hover:bg-muted/30"
                   data-testid={`hourly-item-${actualIndex}`}
                 >
                   <div className="text-xs text-muted-foreground font-medium">
                     {hour.time}
                   </div>
-                  
+
                   <WeatherIcon className={`w-6 h-6 ${getWeatherColor(hour.condition)}`} />
-                  
+
                   <div className="text-sm font-medium text-foreground" data-testid={`hourly-temp-${actualIndex}`}>
                     {Math.round(hour.temperature)}{tempUnit}
                   </div>
-                  
+
                   {hour.precipitation > 0 && (
                     <div className="text-xs text-blue-500">
                       {hour.precipitation}%
                     </div>
                   )}
-                  
+
                   <div className="text-xs text-muted-foreground">
-                    {hour.windSpeed} {windUnit}
+                    {Math.round(hour.windSpeed)} {windUnit}
                   </div>
                 </div>
               );
             })}
           </div>
-        </div>
 
-        {/* Temperature Trend Chart for Current Page */}
-        <div className="pt-4 border-t border-border">
-          <div className="text-sm text-muted-foreground mb-2">Temperature trend (current page)</div>
-          <div className="h-16 flex items-end space-x-1">
-            {getCurrentPageData().map((hour: HourlyData, index: number) => {
-              const pageData = getCurrentPageData();
-              const maxTemp = Math.max(...pageData.map((h: HourlyData) => h.temperature));
-              const minTemp = Math.min(...pageData.map((h: HourlyData) => h.temperature));
-              const normalizedHeight = ((hour.temperature - minTemp) / (maxTemp - minTemp)) * 100;
-              
-              return (
-                <div
-                  key={index}
-                  className="flex-1 bg-primary/20 rounded-t-sm min-h-[4px] transition-colors"
-                  style={{ height: `${Math.max(4, normalizedHeight)}%` }}
-                  data-testid={`temp-bar-${currentPage * itemsPerPage + index}`}
-                />
-              );
-            })}
+          {/* Temperature Trend Chart for Current Page */}
+          <div className="pt-4 border-t border-border">
+            <div className="text-sm text-muted-foreground mb-2">Temperature trend (current page)</div>
+            <div className="h-16 flex items-end space-x-1">
+              {getCurrentPageData().map((hour: HourlyData, index: number) => {
+                const pageData = getCurrentPageData();
+                const maxTemp = Math.max(...pageData.map((h: HourlyData) => h.temperature));
+                const minTemp = Math.min(...pageData.map((h: HourlyData) => h.temperature));
+                const normalizedHeight = ((hour.temperature - minTemp) / (maxTemp - minTemp)) * 100;
+                
+                return (
+                  <div
+                    key={index}
+                    className="flex-1 bg-primary/20 rounded-t-sm min-h-[4px] transition-colors"
+                    style={{ height: `${Math.max(4, normalizedHeight)}%` }}
+                    data-testid={`temp-bar-${currentPage * itemsPerPage + index}`}
+                  />
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>
