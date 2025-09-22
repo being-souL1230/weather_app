@@ -1,0 +1,1102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* LIGHT MODE */
+:root {
+  --button-outline: rgba(0,0,0, .10);
+  --badge-outline: rgba(0,0,0, .05);
+
+  /* Automatic computation of border around primary / danger buttons */
+  --opaque-button-border-intensity: -8; /* In terms of percentages */
+
+  /* Backgrounds applied on top of other backgrounds when hovered/active */
+  --elevate-1: rgba(0,0,0, .03);
+  --elevate-2: rgba(0,0,0, .08);
+
+  --background: 0 0% 100%;
+
+  --foreground: 220 10% 3.9%;
+
+  --border: 220 13% 91%;
+
+  --card: 0 0% 100%;
+
+  --card-foreground: 220 10% 3.9%;
+
+  --card-border: 220 13% 91%;
+
+  --sidebar: 0 0% 98%;
+
+  --sidebar-foreground: 220 10% 3.9%;
+
+  --sidebar-border: 220 13% 91%;
+
+  --sidebar-primary: 200 70% 50%;
+
+  --sidebar-primary-foreground: 0 0% 100%;
+
+  --sidebar-accent: 220 14.3% 95.9%;
+
+  --sidebar-accent-foreground: 220 10% 3.9%;
+
+  --sidebar-ring: 200 70% 50%;
+
+  --popover: 0 0% 100%;
+
+  --popover-foreground: 220 10% 3.9%;
+
+  --popover-border: 220 13% 91%;
+
+  --primary: 200 70% 50%;
+
+  --primary-foreground: 0 0% 100%;
+
+  --secondary: 220 14.3% 95.9%;
+
+  --secondary-foreground: 220 10% 3.9%;
+
+  --muted: 220 14.3% 95.9%;
+
+  --muted-foreground: 220 3.8% 46.1%;
+
+  --accent: 220 14.3% 95.9%;
+
+  --accent-foreground: 220 10% 3.9%;
+
+  --destructive: 0 84.2% 60.2%;
+
+  --destructive-foreground: 0 0% 98%;
+
+  --input: 220 13% 91%;
+  --ring: 200 70% 50%;
+  --chart-1: 45 100% 60%;
+  --chart-2: 210 60% 50%;
+  --chart-3: 120 50% 45%;
+  --chart-4: 280 60% 55%;
+  --chart-5: 15 80% 55%;
+
+  --font-sans: Inter, Open Sans, sans-serif;
+  --font-serif: Georgia, serif;
+  --font-mono: Menlo, monospace;
+  --radius: .5rem; /* 8px */
+  --shadow-2xs: 0px 1px 2px 0px hsl(220 25% 25% / 0.05);
+  --shadow-xs: 0px 1px 3px 0px hsl(220 25% 25% / 0.08);
+  --shadow-sm: 0px 1px 2px 0px hsl(220 25% 25% / 0.05), 0px 1px 3px -1px hsl(220 25% 25% / 0.08);
+  --shadow: 0px 1px 3px 0px hsl(220 25% 25% / 0.08), 0px 1px 2px -1px hsl(220 25% 25% / 0.05);
+  --shadow-md: 0px 4px 6px -1px hsl(220 25% 25% / 0.08), 0px 2px 4px -1px hsl(220 25% 25% / 0.05);
+  --shadow-lg: 0px 10px 15px -3px hsl(220 25% 25% / 0.08), 0px 4px 6px -2px hsl(220 25% 25% / 0.05);
+  --shadow-xl: 0px 20px 25px -5px hsl(220 25% 25% / 0.08), 0px 10px 10px -5px hsl(220 25% 25% / 0.04);
+  --shadow-2xl: 0px 25px 50px -12px hsl(220 25% 25% / 0.15);
+  --tracking-normal: 0em;
+  --spacing: 0.25rem;
+
+  /* Automatically computed borders - intensity can be controlled by the user by the --opaque-button-border-intensity setting */
+
+  /* Fallback for older browsers */
+  --sidebar-primary-border: hsl(var(--sidebar-primary));
+  --sidebar-primary-border: hsl(from hsl(var(--sidebar-primary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+
+  /* Fallback for older browsers */
+  --sidebar-accent-border: hsl(var(--sidebar-accent));
+  --sidebar-accent-border: hsl(from hsl(var(--sidebar-accent)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+
+  /* Fallback for older browsers */
+  --primary-border: hsl(var(--primary));
+  --primary-border: hsl(from hsl(var(--primary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+
+  /* Fallback for older browsers */
+  --secondary-border: hsl(var(--secondary));
+  --secondary-border: hsl(from hsl(var(--secondary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+
+  /* Fallback for older browsers */
+  --muted-border: hsl(var(--muted));
+  --muted-border: hsl(from hsl(var(--muted)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+
+  /* Fallback for older browsers */
+  --accent-border: hsl(var(--accent));
+  --accent-border: hsl(from hsl(var(--accent)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+
+  /* Fallback for older browsers */
+  --destructive-border: hsl(var(--destructive));
+  --destructive-border: hsl(from hsl(var(--destructive)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+}
+
+.dark {
+  --button-outline: rgba(255,255,255, .10);
+  --badge-outline: rgba(255,255,255, .05);
+
+  --opaque-button-border-intensity: 9;  /* In terms of percentages */
+
+  /* Backgrounds applied on top of other backgrounds when hovered/active */
+  --elevate-1: rgba(255,255,255, .06);
+  --elevate-2: rgba(255,255,255, .12);
+
+  --background: 220 30% 6%;
+
+  --foreground: 220 15% 95%;
+
+  --border: 220 20% 12%;
+
+  --card: 220 25% 9%;
+
+  --card-foreground: 220 15% 92%;
+
+  --card-border: 220 25% 14%;
+
+  --sidebar: 220 25% 8%;
+
+  --sidebar-foreground: 220 15% 92%;
+
+  --sidebar-border: 220 30% 12%;
+
+  --sidebar-primary: 200 70% 65%;
+
+  --sidebar-primary-foreground: 220 15% 98%;
+
+  --sidebar-accent: 220 20% 14%;
+
+  --sidebar-accent-foreground: 220 15% 92%;
+
+  --sidebar-ring: 200 70% 65%;
+
+  --popover: 220 25% 10%;
+
+  --popover-foreground: 220 15% 92%;
+
+  --popover-border: 220 30% 16%;
+
+  --primary: 200 70% 65%;
+
+  --primary-foreground: 220 15% 98%;
+
+  --secondary: 220 20% 14%;
+
+  --secondary-foreground: 220 15% 92%;
+
+  --muted: 220 15% 12%;
+
+  --muted-foreground: 220 10% 68%;
+
+  --accent: 220 15% 14%;
+
+  --accent-foreground: 220 15% 92%;
+
+  --destructive: 0 65% 45%;
+
+  --destructive-foreground: 0 15% 95%;
+
+  --input: 220 30% 18%;
+  --ring: 200 70% 65%;
+  --chart-1: 45 85% 70%;
+  --chart-2: 210 70% 70%;
+  --chart-3: 120 45% 60%;
+  --chart-4: 280 55% 70%;
+  --chart-5: 15 75% 70%;
+
+  --shadow-2xs: 0px 1px 2px 0px hsl(220 25% 3% / 0.25);
+  --shadow-xs: 0px 1px 3px 0px hsl(220 25% 3% / 0.30);
+  --shadow-sm: 0px 1px 2px 0px hsl(220 25% 3% / 0.25), 0px 1px 3px -1px hsl(220 25% 3% / 0.30);
+  --shadow: 0px 1px 3px 0px hsl(220 25% 3% / 0.30), 0px 1px 2px -1px hsl(220 25% 3% / 0.25);
+  --shadow-md: 0px 4px 6px -1px hsl(220 25% 3% / 0.30), 0px 2px 4px -1px hsl(220 25% 3% / 0.25);
+  --shadow-lg: 0px 10px 15px -3px hsl(220 25% 3% / 0.30), 0px 4px 6px -2px hsl(220 25% 3% / 0.25);
+  --shadow-xl: 0px 20px 25px -5px hsl(220 25% 3% / 0.30), 0px 10px 10px -5px hsl(220 25% 3% / 0.20);
+  --shadow-2xl: 0px 25px 50px -12px hsl(220 25% 3% / 0.35);
+
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+  }
+}
+
+/**
+ * Using the elevate system.
+ * Automatic contrast adjustment.
+ *
+ * <element className="hover-elevate" />
+ * <element className="active-elevate-2" />
+ *
+ * // Using the tailwind utility when a data attribute is "on"
+ * <element className="toggle-elevate data-[state=on]:toggle-elevated" />
+ * // Or manually controlling the toggle state
+ * <element className="toggle-elevate toggle-elevated" />
+ *
+ * Elevation systems have to handle many states.
+ * - not-hovered, vs. hovered vs. active  (three mutually exclusive states)
+ * - toggled or not
+ * - focused or not (this is not handled with these utilities)
+ *
+ * Even without handling focused or not, this is six possible combinations that
+ * need to be distinguished from eachother visually.
+ */
+@layer utilities {
+
+  /* Hide ugly search cancel button in Chrome until we can style it properly */
+  input[type="search"]::-webkit-search-cancel-button {
+    @apply hidden;
+  }
+
+  /* Placeholder styling for contentEditable div */
+  [contenteditable][data-placeholder]:empty::before {
+    content: attr(data-placeholder);
+    color: hsl(var(--muted-foreground));
+    pointer-events: none;
+  }
+
+  /* .no-default-hover-elevate/no-default-active-elevate is an escape hatch so consumers of
+   * buttons/badges can remove the automatic brightness adjustment on interactions
+   * and program their own. */
+  .no-default-hover-elevate {}
+
+  .no-default-active-elevate {}
+
+
+  /**
+   * Toggleable backgrounds go behind the content. Hoverable/active goes on top.
+   * This way they can stack/compound. Both will overlap the parent's borders!
+   * So borders will be automatically adjusted both on toggle, and hover/active,
+   * and they will be compounded.
+   */
+  .toggle-elevate::before,
+  .toggle-elevate-2::before {
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    inset: 0px;
+    /*border-radius: inherit;   match rounded corners */
+    border-radius: inherit;
+    z-index: -1;
+    /* sits behind content but above backdrop */
+  }
+
+  .toggle-elevate.toggle-elevated::before {
+    background-color: var(--elevate-2);
+  }
+
+  /* If there's a 1px border, adjust the inset so that it covers that parent's border */
+  .border.toggle-elevate::before {
+    inset: -1px;
+  }
+
+  /* Does not work on elements with overflow:hidden! */
+  .hover-elevate:not(.no-default-hover-elevate),
+  .active-elevate:not(.no-default-active-elevate),
+  .hover-elevate-2:not(.no-default-hover-elevate),
+  .active-elevate-2:not(.no-default-active-elevate) {
+    position: relative;
+    z-index: 0;
+  }
+
+  /* Disabled overlay generator to remove shine effects per user request */
+  .hover-elevate:not(.no-default-hover-elevate)::after,
+  .active-elevate:not(.no-default-active-elevate)::after,
+  .hover-elevate-2:not(.no-default-hover-elevate)::after,
+  .active-elevate-2:not(.no-default-active-elevate)::after {
+    content: none !important;
+  }
+
+  /* Card-specific hover effects without the shine */
+  .card-hover {
+    transition: opacity 150ms ease, transform 150ms ease;
+  }
+  
+  .card-hover:hover {
+    opacity: 0.96;
+    transform: translateY(-1px);
+  }
+  
+  .card-hover:active {
+    opacity: 0.92;
+    transform: translateY(0px);
+  }
+
+  /* If there's a 1px border, adjust the inset so that it covers that parent's border */
+  .border.hover-elevate:not(.no-hover-interaction-elevate)::after,
+  .border.active-elevate:not(.no-active-interaction-elevate)::after,
+  .border.hover-elevate-2:not(.no-hover-interaction-elevate)::after,
+  .border.active-elevate-2:not(.no-active-interaction-elevate)::after,
+  .border.hover-elevate:not(.no-hover-interaction-elevate)::after {
+    inset: -1px;
+  }
+
+  /* Gradient backgrounds for enhanced aesthetics */
+  .gradient-bg {
+    background: linear-gradient(135deg, hsl(var(--card)) 0%, hsl(var(--muted)) 100%);
+  }
+
+  .gradient-border {
+    background: linear-gradient(135deg, hsl(var(--border)) 0%, hsl(var(--accent)) 100%);
+  }
+
+  .glass-effect {
+    backdrop-filter: blur(20px);
+    background: hsla(var(--card) / 0.8);
+    border: 1px solid hsla(var(--border) / 0.2);
+  }
+
+  .weather-gradient {
+    background: linear-gradient(135deg, 
+      hsl(var(--background)) 0%, 
+      hsl(220 25% 10%) 50%, 
+      hsl(220 30% 8%) 100%);
+  }
+
+  /* Enhanced animations */
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.3s ease-out;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.4s ease-out;
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-pulse-soft {
+    animation: pulseSoft 2s ease-in-out infinite;
+  }
+
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+
+  /* Weather animation utilities */
+  .animate-rain {
+    animation: rain 2s ease-in-out infinite;
+  }
+
+  .animate-snow {
+    animation: snow 2s ease-in-out infinite;
+  }
+
+  .animate-sun {
+    animation: sun 3s ease-in-out infinite;
+  }
+
+  .animate-clouds {
+    animation: clouds 4s ease-in-out infinite;
+  }
+
+  .animate-thunder {
+    animation: thunder 1s ease-in-out infinite;
+  }
+
+  .animate-wind {
+    animation: wind 2s ease-in-out infinite;
+  }
+
+  .animate-mist {
+    animation: mist 3s ease-in-out infinite;
+  }
+
+  .animate-rain-drop {
+    animation: rain-drop 2s linear infinite;
+  }
+
+  .animate-snow-flake {
+    animation: snow-flake 3s linear infinite;
+  }
+
+  .animate-sun-rays {
+    animation: sun-rays 4s linear infinite;
+  }
+
+  /* Enhanced glass effects */
+  .glass-effect-enhanced {
+    backdrop-filter: blur(25px) saturate(180%);
+    background: hsla(var(--card) / 0.7);
+    border: 1px solid hsla(var(--border) / 0.3);
+    box-shadow:
+      0 8px 32px 0 hsla(var(--foreground) / 0.1),
+      0 2px 16px 0 hsla(var(--foreground) / 0.05);
+  }
+
+  .glass-effect-subtle {
+    backdrop-filter: blur(15px);
+    background: hsla(var(--card) / 0.5);
+    border: 1px solid hsla(var(--border) / 0.2);
+  }
+
+  /* Enhanced gradient backgrounds */
+  .gradient-bg-primary {
+    background: linear-gradient(135deg,
+      hsl(var(--primary) / 0.1) 0%,
+      hsl(var(--card)) 25%,
+      hsl(var(--accent) / 0.8) 100%);
+  }
+
+  .gradient-bg-secondary {
+    background: linear-gradient(135deg,
+      hsl(var(--secondary) / 0.2) 0%,
+      hsl(var(--card)) 50%,
+      hsl(var(--muted) / 0.6) 100%);
+  }
+
+  .gradient-bg-success {
+    background: linear-gradient(135deg,
+      hsl(120 50% 50% / 0.1) 0%,
+      hsl(var(--card)) 50%,
+      hsl(120 40% 60% / 0.2) 100%);
+  }
+
+  /* Weather-specific gradients */
+  .weather-sunny {
+    background: linear-gradient(135deg,
+      #fbbf24 0%,
+      #f59e0b 25%,
+      #d97706 50%,
+      #92400e 75%,
+      #78350f 100%);
+  }
+
+  .weather-cloudy {
+    background: linear-gradient(135deg,
+      #9ca3af 0%,
+      #6b7280 25%,
+      #4b5563 50%,
+      #374151 75%,
+      #1f2937 100%);
+  }
+
+  .weather-rainy {
+    background: linear-gradient(135deg,
+      #3b82f6 0%,
+      #1d4ed8 25%,
+      #1e40af 50%,
+      #1e3a8a 75%,
+      #172554 100%);
+  }
+
+  .weather-snow {
+    background: linear-gradient(135deg,
+      #e5e7eb 0%,
+      #d1d5db 25%,
+      #9ca3af 50%,
+      #6b7280 75%,
+      #4b5563 100%);
+  }
+
+  .weather-storm {
+    background: linear-gradient(135deg,
+      #1f2937 0%,
+      #111827 25%,
+      #0f172a 50%,
+      #0b1120 75%,
+      #030712 100%);
+  }
+
+  /* Enhanced hover effects */
+  .hover-lift {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow:
+      0 20px 40px -4px hsla(var(--foreground) / 0.15),
+      0 8px 16px -4px hsla(var(--foreground) / 0.1);
+  }
+
+  .hover-glow:hover {
+    box-shadow:
+      0 0 30px hsla(var(--primary) / 0.4),
+      0 0 60px hsla(var(--primary) / 0.2);
+  }
+
+  /* Loading animations */
+  .loading-shimmer {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      hsla(var(--primary) / 0.2) 50%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  .loading-dots {
+    display: inline-flex;
+    gap: 2px;
+  }
+
+  .loading-dots::after {
+    content: '';
+    animation: loadingDots 1.5s infinite;
+  }
+
+  /* Enhanced card hover effects */
+  .card-premium {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .card-premium::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      hsla(var(--primary) / 0.1),
+      transparent
+    );
+    transition: left 0.5s;
+  }
+
+  .card-premium:hover::before {
+    left: 100%;
+  }
+
+  /* Text effects */
+  .text-shimmer {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--primary)) 0%,
+      hsl(var(--primary) / 0.7) 50%,
+      hsl(var(--primary)) 100%
+    );
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 2s infinite;
+  }
+
+  .text-gradient {
+    background: linear-gradient(135deg,
+      hsl(var(--primary)) 0%,
+      hsl(var(--primary) / 0.8) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Custom scrollbar */
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: hsla(var(--border) / 0.5) transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: hsla(var(--border) / 0.5);
+    border-radius: 3px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background: hsla(var(--border) / 0.7);
+  }
+
+  /* Compact layout utilities */
+  .compact-spacing {
+    padding: 0.75rem 1rem;
+  }
+
+  .compact-card {
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .compact-header {
+    padding: 0.5rem 1rem;
+    height: 3.5rem;
+  }
+
+  .compact-nav {
+    padding: 0.25rem 1rem;
+    height: 2.5rem;
+  }
+
+  .compact-metrics {
+    padding: 0.5rem;
+    gap: 0.5rem;
+  }
+
+  .compact-text {
+    font-size: 0.875rem;
+    line-height: 1.25;
+  }
+
+  .compact-title {
+    font-size: 1.125rem;
+    line-height: 1.5;
+  }
+
+  .compact-temp {
+    font-size: 4rem;
+    line-height: 1;
+  }
+
+  .compact-icon {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .compact-badge {
+    padding: 0.125rem 0.5rem;
+    font-size: 0.75rem;
+  }
+
+  /* Improved space utilization */
+  .dense-layout {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .dense-grid {
+    display: grid;
+    gap: 0.75rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+
+  .dense-metrics-grid {
+    display: grid;
+    gap: 0.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  /* Better mobile space usage */
+  @media (max-width: 640px) {
+    .compact-header {
+      padding: 0.5rem 0.75rem;
+      height: 3rem;
+    }
+
+    .compact-nav {
+      padding: 0.25rem 0.75rem;
+      height: 2rem;
+    }
+
+    .compact-spacing {
+      padding: 0.5rem 0.75rem;
+    }
+
+    .compact-card {
+      padding: 0.75rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .compact-temp {
+      font-size: 3rem;
+    }
+
+    .compact-title {
+      font-size: 1rem;
+    }
+
+    .dense-grid {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+  }
+
+  /* Custom Cursor Styles */
+  .custom-cursor {
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: normal;
+  }
+
+  .custom-cursor .cursor-ring {
+    transition: all 0.15s ease-out;
+  }
+
+  .custom-cursor.hovering {
+    transform: scale(1.5);
+  }
+
+}
+
+/* Mobile-specific enhancements */
+@media (max-width: 768px) {
+  .glass-effect-enhanced,
+  .glass-effect-subtle {
+    backdrop-filter: blur(15px);
+  }
+
+  .weather-sunny,
+  .weather-cloudy,
+  .weather-rainy,
+  .weather-snow,
+  .weather-storm {
+    background-size: cover;
+    background-attachment: fixed;
+  }
+
+  /* Better touch targets */
+  button, .cursor-pointer {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Improved mobile scrolling */
+  .scrollbar-thin {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Mobile-optimized animations */
+  .animate-fade-in {
+    animation-duration: 0.4s;
+  }
+
+  .animate-slide-up {
+    animation-duration: 0.2s;
+  }
+
+  .hover-lift:active {
+    transform: translateY(-2px) scale(0.98);
+  }
+}
+
+@media (max-width: 480px) {
+  /* Extra small screens */
+  .card-premium {
+    margin: 0.5rem;
+    border-radius: 1rem;
+  }
+
+  .weather-background {
+    padding: 1rem;
+  }
+
+  /* Stack navigation on very small screens */
+  nav .flex {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  nav button {
+    flex: 1;
+    min-width: 0;
+  }
+
+  /* Compact weather cards */
+  .weather-metrics-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+
+  /* Smaller text on mobile */
+  .text-8xl {
+    font-size: 4rem;
+  }
+
+  .text-3xl {
+    font-size: 1.5rem;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .glass-effect-enhanced,
+  .glass-effect-subtle {
+    backdrop-filter: blur(5px);
+    background: hsl(var(--background));
+    border: 2px solid hsl(var(--border));
+  }
+
+  .gradient-bg-primary,
+  .gradient-bg-secondary {
+    background: hsl(var(--background));
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in,
+  .animate-slide-up,
+  .animate-scale-in,
+  .animate-float,
+  .animate-pulse-soft,
+  .animate-glow,
+  .loading-shimmer,
+  .hover-lift,
+  .card-premium::before {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .weather-background {
+    background-attachment: scroll !important;
+  }
+}
+
+/* Dark mode specific enhancements */
+.dark .glass-effect-enhanced {
+  background: hsla(var(--card) / 0.8);
+  border: 1px solid hsla(var(--border) / 0.4);
+  box-shadow:
+    0 8px 32px 0 hsla(var(--foreground) / 0.15),
+    0 2px 16px 0 hsla(var(--foreground) / 0.08);
+}
+
+.dark .glass-effect-subtle {
+  background: hsla(var(--card) / 0.6);
+  border: 1px solid hsla(var(--border) / 0.3);
+}
+
+/* Print styles */
+@media print {
+  .glass-effect-enhanced,
+  .glass-effect-subtle,
+  .weather-background {
+    background: white !important;
+    backdrop-filter: none !important;
+    box-shadow: none !important;
+  }
+
+  .animate-fade-in,
+  .animate-slide-up,
+  .animate-scale-in {
+    animation: none !important;
+  }
+}
+
+/* Keyframe animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulseSoft {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 20px hsla(var(--primary) / 0.3);
+  }
+  to {
+    box-shadow: 0 0 40px hsla(var(--primary) / 0.6);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes loadingDots {
+  0% {
+    content: '';
+  }
+  25% {
+    content: '.';
+  }
+  50% {
+    content: '..';
+  }
+  75% {
+    content: '...';
+  }
+  100% {
+    content: '';
+  }
+}
+
+@keyframes rain-drop {
+  0% {
+    transform: translateY(-100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(180deg);
+    opacity: 0;
+  }
+}
+
+@keyframes snow-flake {
+  0% {
+    transform: translateY(-100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(100vh) rotate(180deg);
+    opacity: 0;
+  }
+}
+
+@keyframes sun-rays {
+  0% {
+    transform: translateX(-50%) translateY(-50%) rotate(0deg);
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateX(-50%) translateY(-50%) rotate(360deg);
+    opacity: 0.3;
+  }
+}
+
+@keyframes rain {
+  0% {
+    transform: translateY(-5px);
+  }
+  50% {
+    transform: translateY(5px);
+  }
+  100% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes snow {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(10px) rotate(90deg);
+  }
+  100% {
+    transform: translateY(-10px) rotate(180deg);
+  }
+}
+
+@keyframes sun {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.1);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+@keyframes clouds {
+  0% {
+    transform: translateX(-10px);
+  }
+  50% {
+    transform: translateX(10px);
+  }
+  100% {
+    transform: translateX(-10px);
+  }
+}
+
+@keyframes thunder {
+  0%, 90%, 100% {
+    opacity: 0.3;
+  }
+  45%, 55% {
+    opacity: 1;
+  }
+}
+
+@keyframes wind {
+  0% {
+    transform: rotate(-5deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
+  100% {
+    transform: rotate(-5deg);
+  }
+}
+
+@keyframes mist {
+  0% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+}
