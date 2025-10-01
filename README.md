@@ -137,26 +137,26 @@ aeroforecast/
 │       ├── assets/              # Images, fonts, and other static assets
 │       ├── components/          # Reusable UI components
 │       │   ├── ui/              # Radix UI components
-│       │   ├── AirQualityDetails.tsx  # Air quality visualization
-│       │   ├── AnimatedWeatherIcon.tsx # Weather condition animations
-│       │   ├── CompareLocations.tsx   # Location comparison feature
-│       │   ├── CustomCursor.tsx       # Custom cursor component
-│       │   ├── FavoriteLocations.tsx  # Saved locations
-│       │   ├── ForecastCard.tsx       # Weather forecast display
-│       │   ├── HourlyForecast.tsx     # Hourly forecast view
-│       │   ├── SearchBar.tsx          # Location search
-│       │   ├── ThemeToggle.tsx        # Dark/Light theme switcher
-│       │   ├── UnitToggle.tsx         # Temperature unit toggle
-│       │   ├── WeatherBackground.tsx  # Dynamic weather backgrounds
-│       │   └── WeatherCard.tsx        # Main weather display card
+│       │   ├── AirQualityDetails.tsx           # Air quality visualization
+│       │   ├── AnimatedWeatherIcon.tsx         # Weather condition animations
+│       │   ├── CompareLocations.tsx            # Location comparison feature
+│       │   ├── CustomCursor.tsx                # Custom cursor component
+│       │   ├── FavoriteLocations.tsx           # Saved locations
+│       │   ├── ForecastCard.tsx                # Weather forecast display
+│       │   ├── HourlyForecast.tsx              # Hourly forecast view
+│       │   ├── SearchBar.tsx                   # Location search
+│       │   ├── ThemeToggle.tsx                 # Dark/Light theme switcher
+│       │   ├── UnitToggle.tsx                  # Temperature unit toggle
+│       │   ├── WeatherBackground.tsx           # Dynamic weather backgrounds
+│       │   └── WeatherCard.tsx                 # Main weather display card
 │       │
-│       ├── hooks/               # Custom React hooks
-│       ├── lib/                 # Utility functions and helpers
-│       ├── pages/               # Main application pages
-│       │   ├── WeatherApp.tsx   # Main weather application page
-│       │   └── not-found.tsx    # 404 page
+│       ├── hooks/                    # Custom React hooks
+│       ├── lib/                      # Utility functions and helpers
+│       ├── pages/                    # Main application pages
+│       │   ├── WeatherApp.tsx        # Main weather application page
+│       │   └── not-found.tsx         # 404 page
 │       │
-│       ├── App.tsx              # Main App component
+│       ├── App.tsx              # Main App component         
 │       ├── index.css            # Global styles
 │       └── main.tsx             # Application entry point
 │
