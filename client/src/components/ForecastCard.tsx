@@ -93,18 +93,23 @@ export default function ForecastCard({ forecasts, unit, className = "" }: Foreca
 
                   {/* Temperature and Bar */}
                   <div className="flex items-center justify-between mb-3 sm:mb-4">
-                    <div className="flex items-center space-x-3 sm:space-x-4">
-                      <div className={`text-base sm:text-base font-semibold ${isToday ? 'text-blue-400' : 'text-foreground'}`}>
-                        {Math.round(forecast.high)}{tempUnit}
+                    <div className="flex items-center justify-between w-full">
+                      <div className="flex items-center space-x-3 sm:space-x-4">
+                        <div className={`text-base sm:text-base font-semibold ${isToday ? 'text-blue-400' : 'text-foreground'}`}>
+                          {Math.round(forecast.high)}{tempUnit}
+                        </div>
+                        <div className={`text-base ${isToday ? 'text-blue-300' : 'text-muted-foreground'}`}>
+                          {Math.round(forecast.low)}{tempUnit}
+                        </div>
                       </div>
-                      <div className={`text-base ${isToday ? 'text-blue-300' : 'text-muted-foreground'}`}>
-                        {Math.round(forecast.low)}{tempUnit}
+                      
+                      {/* Precipitation percentage (only on mobile) */}
+                      <div className="sm:hidden text-sm font-medium">
+                        {forecast.precipitation}%
                       </div>
-                    </div>
-
-                    {/* Glass Precipitation Bar */}
-                    <div className="flex items-center space-x-3 sm:space-x-4">
-                      <div className="relative w-20 sm:w-16 md:w-20 lg:w-24 h-2.5 sm:h-2 bg-gradient-to-r from-white/20 to-white/10 rounded-full overflow-hidden backdrop-blur-sm shadow-inner">
+                      
+                      {/* Glass Precipitation Bar (only on mobile) */}
+                      <div className="sm:hidden flex items-center w-20 h-2 bg-gradient-to-r from-white/20 to-white/10 rounded-full overflow-hidden backdrop-blur-sm shadow-inner">
                         <div
                           className="h-full bg-gradient-to-r from-blue-400 via-blue-600 to-blue-800 rounded-full transition-all duration-500 shadow-lg relative"
                           style={{
