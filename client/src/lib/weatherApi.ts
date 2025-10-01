@@ -21,7 +21,7 @@ export interface CurrentWeather {
   visibility: number;
   pressure: number;
   weatherCode: number;
-  airQualityIndex?: number;
+  airQualityIndex: number;
 }
 
 export interface DayForecast {
