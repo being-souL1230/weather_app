@@ -131,23 +131,60 @@ WEATHER_API_KEY=your_api_key
 
 ```
 aeroforecast/
-├── client/              # Frontend React app
-│   ├── src/
-│   │   ├── components/  # UI components
-│   │   ├── pages/       # Different pages
-│   │   ├── hooks/       # Custom React hooks
-│   │   └── lib/         # Utilities
-│   └── public/          # Static files
+├── client/                      # Frontend React app
+│   ├── public/                  # Static files
+│   └── src/
+│       ├── assets/              # Images, fonts, and other static assets
+│       ├── components/          # Reusable UI components
+│       │   ├── ui/              # Radix UI components
+│       │   ├── AirQualityDetails.tsx  # Air quality visualization
+│       │   ├── AnimatedWeatherIcon.tsx # Weather condition animations
+│       │   ├── CompareLocations.tsx   # Location comparison feature
+│       │   ├── CustomCursor.tsx       # Custom cursor component
+│       │   ├── FavoriteLocations.tsx  # Saved locations
+│       │   ├── ForecastCard.tsx       # Weather forecast display
+│       │   ├── HourlyForecast.tsx     # Hourly forecast view
+│       │   ├── SearchBar.tsx          # Location search
+│       │   ├── ThemeToggle.tsx        # Dark/Light theme switcher
+│       │   ├── UnitToggle.tsx         # Temperature unit toggle
+│       │   ├── WeatherBackground.tsx  # Dynamic weather backgrounds
+│       │   └── WeatherCard.tsx        # Main weather display card
+│       │
+│       ├── hooks/               # Custom React hooks
+│       ├── lib/                 # Utility functions and helpers
+│       ├── pages/               # Main application pages
+│       │   ├── WeatherApp.tsx   # Main weather application page
+│       │   └── not-found.tsx    # 404 page
+│       │
+│       ├── App.tsx              # Main App component
+│       ├── index.css            # Global styles
+│       └── main.tsx             # Application entry point
 │
-├── server/              # Backend Express app
-│   ├── routes.ts        # API routes
-│   └── index.ts         # Server entry point
+├── server/                      # Backend Express server
+│   ├── routes/                  # API route handlers
+│   ├── middleware/              # Express middleware
+│   ├── services/                # Business logic
+│   ├── utils/                   # Utility functions
+│   ├── index.ts                 # Server entry point
+│   └── vite.ts                  # Vite development server setup
 │
-├── shared/              # Shared code (types, schemas)
-│   └── types.ts
+├── shared/                      # Shared code between frontend and backend
+│   ├── schemas/                 # Validation schemas
+│   └── types/                   # TypeScript type definitions
 │
-└── db/                  # Database schemas
-    └── schema.ts
+├── .github/                     # GitHub configuration
+│   └── workflows/               # GitHub Actions workflows
+│
+├── .vscode/                     # VS Code settings
+│   └── settings.json            # Workspace settings
+│
+├── public/                      # Root static files
+├── .env.example                 # Example environment variables
+├── .gitignore                   # Git ignore file
+├── package.json                 # Project dependencies and scripts
+├── tsconfig.json                # TypeScript configuration
+├── vite.config.ts               # Vite configuration
+└── README.md                    # Project documentation
 ```
 
 ---
