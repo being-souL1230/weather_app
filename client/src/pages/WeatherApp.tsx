@@ -583,7 +583,7 @@ export default function WeatherApp() {
                 </div>
               </div>
               <div className="mt-2 pt-2 border-t border-border/30 text-center text-xs text-muted-foreground">
-                &copy; 2024 AeroForecast. Built with &hearts; using React, TypeScript, and Tailwind CSS.
+                &copy; 2025 AeroForecast. Built using React, TypeScript, and Tailwind CSS.
               </div>
             </div>
           </footer>
