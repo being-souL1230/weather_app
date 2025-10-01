@@ -142,7 +142,7 @@ export default function WeatherCard({
             <Wind className="w-4 h-4 text-green-500 relative z-10" />
             <div className="relative z-10">
               <div className="text-xs text-muted-foreground">Wind</div>
-              <div className="text-sm font-semibold" data-testid="metric-wind">{windSpeed} {windUnit}</div>
+              <div className="text-sm font-semibold" data-testid="metric-wind">{windSpeed.toFixed(2)} {windUnit}</div>
             </div>
           </div>
 
