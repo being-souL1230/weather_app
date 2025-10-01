@@ -574,7 +574,7 @@ export default function WeatherApp() {
                   </p>
                   <div className="flex space-x-1">
                     <Badge variant="secondary" className="text-xs px-1.5 py-0.5">
-                      No API Keys Required
+                      Made by Rishab Dixit
                     </Badge>
                     <Badge variant="secondary" className="text-xs px-1.5 py-0.5">
                       Always Free
