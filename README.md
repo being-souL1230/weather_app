@@ -42,8 +42,8 @@ A modern weather app that gives you real-time weather information with a beautif
 
 ### Step 1: Clone the Repository
 ```bash
-git clone https://github.com/your-username/aeroforecast.git
-cd aeroforecast
+git clone https://github.com/being-souL1230/weather_app.git
+cd weather_app
 ```
 
 ### Step 2: Install Dependencies
@@ -69,68 +69,11 @@ npm start
 
 ---
 
-## How to Deploy on Render?
-
-Render is a free hosting service where you can deploy your app easily.
-
-### Step 1: Create a Render Account
-1. Go to [render.com](https://render.com)
-2. Click "Sign Up"
-3. Sign up with GitHub (recommended)
-
-### Step 2: Connect Your GitHub Repository
-1. Go to your Render dashboard
-2. Click the "New +" button
-3. Select "Web Service"
-4. Choose your GitHub repository
-
-### Step 3: Configure the Service
-Enter these settings:
-
-**Basic Settings:**
-- **Name:** `aeroforecast` (or any name you prefer)
-- **Region:** Select the closest region (e.g., Singapore)
-- **Branch:** `main`
-- **Runtime:** `Node`
-
-**Build Settings:**
-- **Build Command:** `npm run build`
-- **Start Command:** `npm start`
-
-**Instance Type:**
-- **Free** (start with the free plan)
-
-### Step 4: Add Environment Variables
-In the "Environment" section, add these variables:
-
-```
-NODE_ENV=production
-PORT=10000
-DATABASE_URL=your_postgres_connection_string
-WEATHER_API_KEY=your_api_key
-```
-
-**Important Notes:** 
-- You can create a free PostgreSQL instance directly on Render for your database
-- Get your Weather API key by creating a free account at [OpenWeatherMap](https://openweathermap.org/api)
-
-### Step 5: Deploy!
-1. Click "Create Web Service"
-2. Render will automatically build and deploy your app
-3. Your app will be live in 5-10 minutes
-4. You'll get a URL like: `https://aeroforecast.onrender.com`
-
-### Troubleshooting (If Something Goes Wrong)
-- **Build failing?** Check the logs to make sure all dependencies are installing correctly
-- **App crashing?** Verify that your environment variables are set correctly
-- **Database not connecting?** Double-check your PostgreSQL connection string
-
----
 
 ## Project Structure
 
 ```
-aeroforecast/
+weather_app/
 ├── client/                      # Frontend React app
 │   ├── public/                  # Static files
 │   └── src/
@@ -213,15 +156,14 @@ This app's design is inspired by Apple Weather and Weather.com:
 
 ## Pro Tips
 
-1. **Free Tier Limits:** Render's free tier gives you 750 hours per month. If you're not using the app, it goes into sleep mode.
 
-2. **Custom Domain:** You can connect your own custom domain later (e.g., myweatherapp.com)
+1. **Custom Domain:** You can connect your own custom domain later (e.g., myweatherapp.com)
 
-3. **Database Backups:** Don't forget to take regular backups if you have important data
+2. **Database Backups:** Don't forget to take regular backups if you have important data
 
-4. **Monitoring:** Regularly check the logs in your Render dashboard
+3. **Monitoring:** Regularly check the logs in your Render dashboard
 
-5. **Auto Updates:** Whenever you push code to GitHub, Render will automatically redeploy
+4. **Auto Updates:** Whenever you push code to GitHub, Render will automatically redeploy
 
 ---
 
@@ -239,7 +181,3 @@ If you're running into issues:
 MIT License - Free to use, modify, and distribute!
 
 ---
-
-**Made with love for weather enthusiasts!**
-
-Happy Coding!
