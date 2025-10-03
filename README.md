@@ -117,6 +117,7 @@ npm install
 
 ### Step 3: Run in Development Mode
 ```bash
+cd client
 npm run dev
 ```
 

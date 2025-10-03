@@ -14,6 +14,7 @@ import {
   convertWindSpeed,
   convertPrecipitation
 } from '@/lib/weatherApi';
+import { useOnlineStatus } from './useOnlineStatus';
 
 // Hook for managing favorites in localStorage
 export function useFavorites() {
@@ -134,6 +135,7 @@ export function useCurrentLocation() {
 // Hook for weather data with unit conversion
 export function useWeatherData(latitude?: number, longitude?: number, unit: 'metric' | 'imperial' = 'metric') {
   const queryClient = useQueryClient();
+  const isOnline = useOnlineStatus();
   
   // Current weather
   const { data: currentWeather, isLoading: currentLoading, error: currentError } = useQuery({
@@ -141,7 +143,7 @@ export function useWeatherData(latitude?: number, longitude?: number, unit: 'met
     queryFn: () => getCurrentWeather(latitude!, longitude!),
     enabled: !!latitude && !!longitude,
     staleTime: 10 * 60 * 1000, // 10 minutes
-    refetchInterval: 10 * 60 * 1000, // Auto-refresh every 10 minutes
+    refetchInterval: isOnline ? 10 * 60 * 1000 : false, // Auto-refresh every 10 minutes when online
   });
 
   // Weekly forecast
@@ -150,6 +152,7 @@ export function useWeatherData(latitude?: number, longitude?: number, unit: 'met
     queryFn: () => getWeeklyForecast(latitude!, longitude!),
     enabled: !!latitude && !!longitude,
     staleTime: 30 * 60 * 1000, // 30 minutes
+    refetchInterval: isOnline ? 30 * 60 * 1000 : false, // Only refresh when online
   });
 
   // Hourly forecast
@@ -158,6 +161,7 @@ export function useWeatherData(latitude?: number, longitude?: number, unit: 'met
     queryFn: () => getHourlyForecast(latitude!, longitude!),
     enabled: !!latitude && !!longitude,
     staleTime: 15 * 60 * 1000, // 15 minutes
+    refetchInterval: isOnline ? 15 * 60 * 1000 : false, // Only refresh when online
   });
 
   // Convert data based on unit preference

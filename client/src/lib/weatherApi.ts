@@ -1,4 +1,6 @@
 // Open-Meteo API utilities for weather data
+import { saveToCache, getFromCache, cacheKeys } from './offlineCache';
+
 export interface Location {
   id: string;
   name: string;
@@ -80,9 +82,17 @@ const getWeatherCondition = (code: number): { condition: string; description: st
   return weatherCodes[code] || { condition: 'cloudy', description: 'Unknown' };
 };
 
+import { saveToCache, getFromCache, cacheKeys } from './offlineCache';
+
 // Geocoding API - Search for locations
 export async function searchLocations(query: string): Promise<Location[]> {
   if (query.length < 2) return [];
+  
+  // Try to get from cache first
+  const cachedLocations = getFromCache<Location[]>(cacheKeys.location(query));
+  if (cachedLocations) {
+    return cachedLocations;
+  }
   
   try {
     const response = await fetch(
@@ -97,14 +107,19 @@ export async function searchLocations(query: string): Promise<Location[]> {
     
     if (!data.results) return [];
     
-    return data.results.map((result: any) => ({
+    const locations = data.results.map((result: any) => ({
       id: `${result.latitude}_${result.longitude}`,
       name: result.name,
-      country: result.country || '',
+      country: result.country,
       latitude: result.latitude,
       longitude: result.longitude,
-      admin1: result.admin1 || '',
+      admin1: result.admin1,
     }));
+    
+    // Save to cache
+    saveToCache(cacheKeys.location(query), locations);
+    
+    return locations;
   } catch (error) {
     console.error('Error searching locations:', error);
     return [];
@@ -113,6 +128,12 @@ export async function searchLocations(query: string): Promise<Location[]> {
 
 // Get current weather data
 export async function getCurrentWeather(latitude: number, longitude: number): Promise<CurrentWeather> {
+  // Try to get from cache first
+  const cachedWeather = getFromCache<CurrentWeather>(cacheKeys.currentWeather(latitude, longitude));
+  if (cachedWeather) {
+    return cachedWeather;
+  }
+  
   try {
     // Fetch weather data
     const weatherResponse = await fetch(
@@ -142,7 +163,7 @@ export async function getCurrentWeather(latitude: number, longitude: number): Pr
       console.warn('Failed to fetch air quality data:', error);
     }
 
-    return {
+    const weatherResult = {
       location: 'Current Location', // This will be updated with reverse geocoding
       temperature: Math.round(current.temperature_2m),
       condition,
@@ -157,6 +178,11 @@ export async function getCurrentWeather(latitude: number, longitude: number): Pr
       weatherCode: current.weather_code,
       airQualityIndex,
     };
+    
+    // Save to cache
+    saveToCache(cacheKeys.currentWeather(latitude, longitude), weatherResult);
+    
+    return weatherResult;
   } catch (error) {
     console.error('Error fetching current weather:', error);
     throw new Error('Failed to fetch weather data');
@@ -165,6 +191,12 @@ export async function getCurrentWeather(latitude: number, longitude: number): Pr
 
 // Get 7-day forecast
 export async function getWeeklyForecast(latitude: number, longitude: number): Promise<DayForecast[]> {
+  // Try to get from cache first
+  const cachedForecast = getFromCache<DayForecast[]>(cacheKeys.weeklyForecast(latitude, longitude));
+  if (cachedForecast) {
+    return cachedForecast;
+  }
+  
   try {
     const response = await fetch(
       `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,relative_humidity_2m_mean&timezone=auto`
@@ -179,7 +211,7 @@ export async function getWeeklyForecast(latitude: number, longitude: number): Pr
     
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     
-    return daily.time.map((date: string, index: number) => {
+    const forecast = daily.time.map((date: string, index: number) => {
       const dateObj = new Date(date);
       const dayName = index === 0 ? 'Today' : index === 1 ? 'Tomorrow' : days[dateObj.getDay()];
       const { condition } = getWeatherCondition(daily.weather_code[index]);
@@ -195,6 +227,11 @@ export async function getWeeklyForecast(latitude: number, longitude: number): Pr
         weatherCode: daily.weather_code[index],
       };
     });
+    
+    // Save to cache
+    saveToCache(cacheKeys.weeklyForecast(latitude, longitude), forecast);
+    
+    return forecast;
   } catch (error) {
     console.error('Error fetching weekly forecast:', error);
     throw new Error('Failed to fetch forecast data');
@@ -202,8 +239,13 @@ export async function getWeeklyForecast(latitude: number, longitude: number): Pr
 }
 
 // Get hourly forecast
-// Get hourly forecast
 export async function getHourlyForecast(latitude: number, longitude: number): Promise<HourlyData[]> {
+  // Try to get from cache first
+  const cachedHourly = getFromCache<HourlyData[]>(cacheKeys.hourlyForecast(latitude, longitude));
+  if (cachedHourly) {
+    return cachedHourly;
+  }
+  
   try {
     const response = await fetch(
       `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,precipitation_probability,weather_code,wind_speed_10m&timezone=auto&forecast_days=7`
@@ -220,7 +262,7 @@ export async function getHourlyForecast(latitude: number, longitude: number): Pr
     const currentHour = now.getHours();
     
     // Get next 7 days (168 hours) starting from current hour
-    return hourly.time.slice(currentHour, currentHour + 168).map((time: string, index: number) => {
+    const hourlyData = hourly.time.slice(currentHour, currentHour + 168).map((time: string, index: number) => {
       const date = new Date(time);
       const hour = date.getHours();
       const timeString = hour === 0 ? '12 AM' : hour === 12 ? '12 PM' : hour > 12 ? `${hour - 12} PM` : `${hour} AM`;
@@ -235,6 +277,11 @@ export async function getHourlyForecast(latitude: number, longitude: number): Pr
         weatherCode: hourly.weather_code[currentHour + index],
       };
     });
+    
+    // Save to cache
+    saveToCache(cacheKeys.hourlyForecast(latitude, longitude), hourlyData);
+    
+    return hourlyData;
   } catch (error) {
     console.error('Error fetching hourly forecast:', error);
     throw new Error('Failed to fetch hourly data');

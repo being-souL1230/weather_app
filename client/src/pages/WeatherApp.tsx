@@ -8,9 +8,11 @@ import ForecastCard from "@/components/ForecastCard";
 import HourlyForecast from "@/components/HourlyForecast";
 import FavoriteLocations from "@/components/FavoriteLocations";
 import CompareLocations from "@/components/CompareLocations";
+import WeatherMap from "@/components/WeatherMap";
 import UnitToggle from "@/components/UnitToggle";
 import ThemeToggle from "@/components/ThemeToggle";
 import CustomCursor from "@/components/CustomCursor";
+import { useOnlineStatus } from "@/hooks/useOnlineStatus";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -27,7 +29,8 @@ export default function WeatherApp() {
   const [currentLocation, setCurrentLocation] = useState<Location | null>(null);
   const [compareLocations, setCompareLocations] = useState<Location[]>([]);
   const [unit, setUnit] = useState<'metric' | 'imperial'>('metric');
-  const [activeView, setActiveView] = useState<'weather' | 'forecast' | 'hourly' | 'suggestions' | 'air-quality' | 'compare' | 'favorites'>('weather');
+  const [activeView, setActiveView] = useState<'weather' | 'forecast' | 'hourly' | 'suggestions' | 'air-quality' | 'compare' | 'favorites' | 'map'>('weather');
+  const isOnline = useOnlineStatus();
 
   // Mobile menu state for header
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -299,6 +302,7 @@ export default function WeatherApp() {
                   { id: 'weather', label: 'Current', icon: MapPin },
                   { id: 'forecast', label: '7-Day', icon: BarChart3 },
                   { id: 'hourly', label: 'Hourly', icon: Clock },
+                  { id: 'map', label: 'Map', icon: MapPin },
                   { id: 'suggestions', label: 'AI Tips', icon: Brain },
                   { id: 'air-quality', label: 'Air Quality', icon: Wind },
                   { id: 'compare', label: 'Compare', icon: BarChart3 },
@@ -523,6 +527,27 @@ export default function WeatherApp() {
                     }
                   }}
                 />
+              )}
+
+              {/* Map View */}
+              {activeView === 'map' && (
+                <div className="max-w-5xl mx-auto">
+                  <div className="mb-4">
+                    <h2 className="text-2xl font-bold mb-2">Weather Map</h2>
+                    <p className="text-muted-foreground">
+                      Interactive weather map showing current conditions and forecasts.
+                      {!isOnline && (
+                        <span className="ml-2 text-destructive font-medium">
+                          (Offline Mode - Limited functionality)
+                        </span>
+                      )}
+                    </p>
+                  </div>
+                  <WeatherMap 
+                    location={currentLocation} 
+                    isLoading={weatherLoading} 
+                  />
+                </div>
               )}
 
               {/* Favorites View */}
