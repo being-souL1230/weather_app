@@ -239,13 +239,4 @@ This project was assigned to me by Frontend Mentor, where Matt serves as the adm
 
 **MIT License** - Yep, it's FREE! 
 
-What does this mean for you?
--  Use it for personal projects
--  Use it for commercial projects
--  Modify it however you want
--  Share it with others
--  Do pretty much whatever you like!
-
-The only thing we ask? Keep the license notice intact. That's it! Go wild and build something awesome! 
-
 ---
