@@ -72,7 +72,7 @@ This handles all the heavy lifting in the background - fetching data, processing
 **TypeScript** - Type-safe backend too!  
 Yep, we use it on the backend as well! Keeps our server code rock-solid and reliable.
 
-**PostgreSQL** - Where we store your favorites  
+**Serverless PostgreSQL** - Where we store your favorites  
 A super reliable database that remembers all your favorite cities safely and securely. Your data is in good hands!
 
 **Drizzle ORM** - Database made simple  
